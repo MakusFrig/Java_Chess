@@ -1,4 +1,3 @@
-
 import java.awt.*;
 
 import java.awt.event.*;
@@ -17,15 +16,6 @@ public class Board implements ActionListener{
 	}
 
 
-	public int convert_coords_y(int y) {
-		return y*100;
-	}
-
-
-	public int convert_coords_x(int x) {
-		return x*100;
-	}
-	
 	JFrame _Chess_Board = new JFrame();
 
 	HashMap<String, JButton> _Places = new HashMap<String, JButton>();
@@ -88,14 +78,14 @@ public class Board implements ActionListener{
 
 
 				} else {
-					_Places.get(Integer.toString(i)).setBackground(Color.black);
+					_Places.get(Integer.toString(i)).setBackground(Color.lightGray);
 
 				}
 
 			} else {
 
 				if (even(t)) {
-					_Places.get(Integer.toString(i)).setBackground(Color.black);
+					_Places.get(Integer.toString(i)).setBackground(Color.lightGray);
 
 
 				} else {
@@ -115,71 +105,77 @@ public class Board implements ActionListener{
 		}
 		//The next two for loops are just long ways of creating the game pieces
 		for (int i = 1; i < 17; i ++) {
-			String _Piece_Name ="W";
 			if (i == 1 || i == 8) {
+
+			ImageIcon _Black_Rook = new ImageIcon("a/rook1.png");
 			
-			_Places.get(Integer.toString(i)).setText("R");
-			
-			_Places.get(Integer.toString(i)).setForeground(Color.red);
-			
+			_Places.get(Integer.toString(i)).setIcon(_Black_Rook);
 
 			} else if (i == 2 || i == 7) {
-				_Places.get(Integer.toString(i)).setText("K");
+
+				ImageIcon _Black_Knight = new ImageIcon("a/knight1.png");
+				_Places.get(Integer.toString(i)).setIcon(_Black_Knight);
 			
-				_Places.get(Integer.toString(i)).setForeground(Color.red);
+
 			} else if (i == 3 || i == 6) {
-				_Places.get(Integer.toString(i)).setText("B");
+				ImageIcon _Black_Bishop = new ImageIcon("a/bishop1.png");
+				_Places.get(Integer.toString(i)).setIcon(_Black_Bishop);
 			
-				_Places.get(Integer.toString(i)).setForeground(Color.red);
+
 			} else if (i == 4) {
-				_Places.get(Integer.toString(i)).setText("Q");
+				ImageIcon _Black_Queen = new ImageIcon("a/queen1.png");
+				_Places.get(Integer.toString(i)).setIcon(_Black_Queen);
 			
-				_Places.get(Integer.toString(i)).setForeground(Color.red);
+
 			} else if (i == 5) {
-				_Places.get(Integer.toString(i)).setText("K");
+				ImageIcon _Black_King = new ImageIcon("a/king1.png");
+				_Places.get(Integer.toString(i)).setIcon(_Black_King);
 			
-				_Places.get(Integer.toString(i)).setForeground(Color.red);
+
 			} else {
-				_Places.get(Integer.toString(i)).setText("P");
-			
-				_Places.get(Integer.toString(i)).setForeground(Color.red);
+				ImageIcon _Black_Pawn = new ImageIcon("a/pawn1.png");
+				_Places.get(Integer.toString(i)).setIcon(_Black_Pawn);
+
 			}
 
 
 		}
 		for (int i = 49; i < 65; i ++) {
-			String _Piece_Name ="W";
 			if (i == 57 || i == 64) {
+
+			ImageIcon _White_Rook = new ImageIcon("a/rook.png");
 			
-			_Places.get(Integer.toString(i)).setText("R");
-			
-			_Places.get(Integer.toString(i)).setForeground(Color.blue);
-			
+			_Places.get(Integer.toString(i)).setIcon(_White_Rook);
 
 			} else if (i == 58 || i == 63) {
-				_Places.get(Integer.toString(i)).setText("K");
+
+				ImageIcon _White_Knight = new ImageIcon("a/knight.png");
+				_Places.get(Integer.toString(i)).setIcon(_White_Knight);
 			
-				_Places.get(Integer.toString(i)).setForeground(Color.blue);
+
 			} else if (i == 59 || i == 62) {
-				_Places.get(Integer.toString(i)).setText("B");
+				ImageIcon _White_Bishop = new ImageIcon("a/bishop.png");
+				_Places.get(Integer.toString(i)).setIcon(_White_Bishop);
 			
-				_Places.get(Integer.toString(i)).setForeground(Color.blue);
+
 			} else if (i == 60) {
-				_Places.get(Integer.toString(i)).setText("Q");
+				ImageIcon _White_Queen = new ImageIcon("a/queen.png");
+				_Places.get(Integer.toString(i)).setIcon(_White_Queen);
 			
-				_Places.get(Integer.toString(i)).setForeground(Color.blue);
+
 			} else if (i == 61) {
-				_Places.get(Integer.toString(i)).setText("K");
+				ImageIcon _White_King = new ImageIcon("a/king.png");
+				_Places.get(Integer.toString(i)).setIcon(_White_King);
 			
-				_Places.get(Integer.toString(i)).setForeground(Color.blue);
+
 			} else {
-				_Places.get(Integer.toString(i)).setText("P");
-			
-				_Places.get(Integer.toString(i)).setForeground(Color.blue);
+				ImageIcon _White_Pawn = new ImageIcon("a/pawn.png");
+				_Places.get(Integer.toString(i)).setIcon(_White_Pawn);
+
 			}
-
-
 		}
+
+		
 
 
 		_Chess_Board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -196,14 +192,6 @@ public class Board implements ActionListener{
 
 	}
 
-	public void clear_text(String x, HashMap<String, JButton> hsh) {
-		for (int i = 0; i < hsh.size(); i++) {
-			if (hsh.get(Integer.toString(i)).getText() == x) {
-				System.out.println("Got here");
-			}
-		}
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -216,15 +204,15 @@ public class Board implements ActionListener{
 					_Selected_Piece = _Places.get(Integer.toString(i));
 				} else if (_Selected_Piece != null) {
 
-					_Places.get(Integer.toString(i)).setText(_Selected_Piece.getText());
-					//This makes sure that the piece retains the same colour
-					_Places.get(Integer.toString(i)).setForeground(_Selected_Piece.getForeground());
+					_Places.get(Integer.toString(i)).setIcon(_Selected_Piece.getIcon());
+
 
 
 					//This for loop resets the square the the piece was previously on
 					for (int u = 1; u < 65; u++) {
 						if (_Places.get(Integer.toString(u)).equals(_Selected_Piece)) {
-							_Places.get(Integer.toString(u)).setText("");
+							ImageIcon _Blank = new ImageIcon("a/blank.png");
+							_Places.get(Integer.toString(u)).setIcon(_Blank);
 
 						}
 					}
