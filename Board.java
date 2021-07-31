@@ -16,13 +16,14 @@ public class Board implements ActionListener{
 	}
 
 
+
 	JFrame _Chess_Board = new JFrame();
 
 	HashMap<String, JButton> _Places = new HashMap<String, JButton>();
 
 	JButton _Selected_Piece = null;
 
-
+	Piece _Piece_Util = new Piece();
 
 	Font _Global_Font = new Font(null, Font.BOLD, 48);
 
@@ -30,10 +31,6 @@ public class Board implements ActionListener{
 
 	Board() {
 		boolean _Place_Color = false;
-
-		
-
-
 
 		for (int i = 1; i < 65; i++) {
 			JButton ref = new JButton();
@@ -175,6 +172,11 @@ public class Board implements ActionListener{
 			}
 		}
 
+		for (int i = 17; i < 49; i++) {
+			ImageIcon _Blank = new ImageIcon("a/blank.png");
+			_Places.get(Integer.toString(i)).setIcon(_Blank);
+		}
+
 		
 
 
@@ -202,8 +204,239 @@ public class Board implements ActionListener{
 				if (_Selected_Piece == null) {
 
 					_Selected_Piece = _Places.get(Integer.toString(i));
-				} else if (_Selected_Piece != null) {
 
+					//_Places.get(Integer.toString(i)).setBackground(Color.red); I want to add colour to the selected piece
+
+				} else if (_Selected_Piece.getIcon().toString() == "a/pawn1.png"){
+
+					
+
+					for (int u = 9; u < 65; u ++) {
+
+						if (_Places.get(Integer.toString(u)) == _Selected_Piece) {
+
+							if (i == (u + 8)) {
+								ImageIcon _Blank = new ImageIcon("a/blank.png");
+								_Places.get(Integer.toString(i)).setIcon(_Selected_Piece.getIcon());
+								_Places.get(Integer.toString(u)).setIcon(_Blank);
+
+								_Selected_Piece = null;
+								
+							} else {
+								System.out.println("Invalid Move");
+								
+								_Selected_Piece = null;
+							}
+
+							return;
+						}
+					}
+
+
+				} else if (_Selected_Piece.getIcon().toString() == "a/pawn.png") {//This statement is for the white pawns to move forward
+
+					for (int u = 9; u < 65; u ++) {
+
+						if (_Places.get(Integer.toString(u)) == _Selected_Piece) {
+
+							if (i == (u - 8)) {
+								ImageIcon _Blank = new ImageIcon("a/blank.png");
+								_Places.get(Integer.toString(i)).setIcon(_Selected_Piece.getIcon());
+								_Places.get(Integer.toString(u)).setIcon(_Blank);
+
+
+								_Selected_Piece = null;
+								
+							} else {
+								System.out.println("Invalid Move");
+								
+								_Selected_Piece = null;
+							}
+
+							return;
+						}
+					}
+
+				} else if (_Selected_Piece.getIcon().toString() == "a/bishop.png") {//This statement is for the white pawns to move forward
+					
+					for (int u = 1; u < 65; u ++) {
+
+
+
+						if (_Places.get(Integer.toString(u)) == _Selected_Piece) {
+
+							int t = u;
+
+							ArrayList<Integer> ul = _Piece_Util.Bishop_Offsets("ul", t);
+
+							ArrayList<Integer> ur = _Piece_Util.Bishop_Offsets("ur", t);
+
+							ArrayList<Integer> dl = _Piece_Util.Bishop_Offsets("dl", t);
+
+							ArrayList<Integer> dr = _Piece_Util.Bishop_Offsets("dr", t);
+
+							
+
+							System.out.print(dl);
+							System.out.print(dr);
+							System.out.print(ul);
+							System.out.println(ur);
+
+							if (dl.contains(i) || dr.contains(i) || ul.contains(i) || ur.contains(i)) {
+
+								if (_Places.get(Integer.toString(i)).getBackground() == _Selected_Piece.getBackground()) {
+
+									ImageIcon _Blank = new ImageIcon("a/blank.png");
+									_Places.get(Integer.toString(i)).setIcon(_Selected_Piece.getIcon());
+									_Places.get(Integer.toString(u)).setIcon(_Blank);
+
+
+									_Selected_Piece = null;
+
+								} else {
+									System.out.println("Invalid Move");
+
+									_Selected_Piece = null;
+								}
+								
+							} else {
+								System.out.println("Invalid Move");
+								
+								_Selected_Piece = null;
+							}
+
+							return;
+						}
+					}
+				} else if (_Selected_Piece.getIcon().toString() == "a/bishop1.png") {//This statement is for the white pawns to move forward
+					
+					for (int u = 1; u < 65; u ++) {
+
+
+
+						if (_Places.get(Integer.toString(u)) == _Selected_Piece) {
+
+							int t = u;
+
+							ArrayList<Integer> ul = _Piece_Util.Bishop_Offsets("ul", t);
+
+							ArrayList<Integer> ur = _Piece_Util.Bishop_Offsets("ur", t);
+
+							ArrayList<Integer> dl = _Piece_Util.Bishop_Offsets("dl", t);
+
+							ArrayList<Integer> dr = _Piece_Util.Bishop_Offsets("dr", t);
+
+							
+
+							System.out.print(dl);
+							System.out.print(dr);
+							System.out.print(ul);
+							System.out.println(ur);
+
+							if (dl.contains(i) || dr.contains(i) || ul.contains(i) || ur.contains(i)) {
+
+								if (_Places.get(Integer.toString(i)).getBackground() == _Selected_Piece.getBackground()) {
+
+									ImageIcon _Blank = new ImageIcon("a/blank.png");
+									_Places.get(Integer.toString(i)).setIcon(_Selected_Piece.getIcon());
+									_Places.get(Integer.toString(u)).setIcon(_Blank);
+
+
+									_Selected_Piece = null;
+
+								} else {
+									System.out.println("Invalid Move");
+
+									_Selected_Piece = null;
+								}
+								
+							} else {
+								System.out.println("Invalid Move");
+								
+								_Selected_Piece = null;
+							}
+
+							return;
+						}
+					}
+				} else if (_Selected_Piece.getIcon().toString() == "a/knight.png") {//This statement is for the white pawns to move forward
+					
+					for (int u = 1; u < 65; u ++) {
+
+
+
+						if (_Places.get(Integer.toString(u)) == _Selected_Piece) {
+
+							ArrayList<Integer> of = _Piece_Util.Knight_Offsets(u);
+
+							System.out.println(of);
+
+							if (of.contains(i)) {
+
+								if (_Places.get(Integer.toString(i)).getBackground() != _Selected_Piece.getBackground()) {
+
+									ImageIcon _Blank = new ImageIcon("a/blank.png");
+									_Places.get(Integer.toString(i)).setIcon(_Selected_Piece.getIcon());
+									_Places.get(Integer.toString(u)).setIcon(_Blank);
+
+
+									_Selected_Piece = null;
+
+								} else {
+									System.out.println("Invalid Move");
+
+									_Selected_Piece = null;
+								}
+								
+							} else {
+								System.out.println("Invalid Move");
+								
+								_Selected_Piece = null;
+							}
+
+							return;
+						}
+					}
+				} else if (_Selected_Piece.getIcon().toString() == "a/knight1.png") {//This statement is for the white pawns to move forward
+					
+					for (int u = 1; u < 65; u ++) {
+
+
+
+						if (_Places.get(Integer.toString(u)) == _Selected_Piece) {
+
+							ArrayList<Integer> of = _Piece_Util.Knight_Offsets(u);
+
+							System.out.println(of);
+
+							if (of.contains(i)) {
+
+								if (_Places.get(Integer.toString(i)).getBackground() != _Selected_Piece.getBackground()) {
+
+									ImageIcon _Blank = new ImageIcon("a/blank.png");
+									_Places.get(Integer.toString(i)).setIcon(_Selected_Piece.getIcon());
+									_Places.get(Integer.toString(u)).setIcon(_Blank);
+
+
+									_Selected_Piece = null;
+
+								} else {
+									System.out.println("Invalid Move");
+
+									_Selected_Piece = null;
+								}
+								
+							} else {
+								System.out.println("Invalid Move");
+								
+								_Selected_Piece = null;
+							}
+
+							return;
+						}
+					}
+				} 
+				else {
 					_Places.get(Integer.toString(i)).setIcon(_Selected_Piece.getIcon());
 
 
