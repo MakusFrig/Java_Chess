@@ -87,7 +87,7 @@ public class Check {
 
 		return _Check;
 	}
-
+	/*
 	public boolean in_check_mate(HashMap<String, JButton> hsh) {
 		Piece _Checkmate_Util = new Piece();
 
@@ -144,7 +144,7 @@ public class Check {
 
 
 	}
-
+	*/
 
 
 
